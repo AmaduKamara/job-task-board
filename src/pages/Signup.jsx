@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
 const Signup = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="w-1/3 border border-gray-700 rounded-md p-6 text-slate-400">
@@ -8,7 +11,7 @@ const Signup = () => {
           Sign Up
         </h1>
         <p>You do not need to create account but it's fine if you want to!</p>
-        <form className="mt-6">
+        <form className="mt-6" onSubmit={handleSubmit}>
           <label className="block mb-2 text-slate-300 text-sm" htmlFor="email">
             Email
           </label>
