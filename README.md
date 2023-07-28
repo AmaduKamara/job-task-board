@@ -37,6 +37,7 @@ Visit the Live Demo at [N/A](N/A)
 
 
 🙏 Acknowledgments
-Give credit to WebDevSimplify for the project design.
+
+> Give credit to WebDevSimplify for the project design.
 
 I would like to give credit to WebDevSimplify as I got inspiration from his project designed for his new course on React and NextJS that's expected to be launched on July 31 2023. I used to opportunity to design and develop the app UI and its features to challenge myself before the course is actually out. I can't wait to subscribe to his course as he is one of the best React developers out there. 👍🏽
