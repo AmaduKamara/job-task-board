@@ -9,9 +9,9 @@ import CreateListing from "./pages/CreateListing";
 
 function App() {
   return (
-    <div className="bg-gray-900 h-screen w-full">
+    <div className="">
       <Header />
-      <div className="mt-5 container mx-auto px-16">
+      <div className="container mx-auto px-32">
         <Routes>
           <Route path="/" element={<Jobs />} />
           <Route path="/tasks" element={<Tasks />} />
