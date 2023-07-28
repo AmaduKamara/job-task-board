@@ -8,7 +8,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <main className="bg-slate-900">
+        <App />
+      </main>
     </BrowserRouter>
   </React.StrictMode>
 );
