@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="py-6 border-b border-slate-100">
-      <div className="container mx-auto px-16 flex items-center justify-between">
+    <header className="py-6 border-b bg-slate-900 border-slate-400 w-full fixed z-50">
+      <div className="container mx-auto px-32 flex items-center justify-between">
         <h1>
           <Link to="/" className="text-white">
             JobTasks Bard
