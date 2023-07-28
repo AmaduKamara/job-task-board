@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NewTask from "./pages/NewTask";
 import CreateListing from "./pages/CreateListing";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/new-task" element={<NewTask />} />
           <Route path="/create-listing" element={<CreateListing />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </div>
