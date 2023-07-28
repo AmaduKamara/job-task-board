@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="w-1/3 border border-gray-700 rounded-md p-6 text-slate-400">
@@ -8,7 +11,7 @@ const Login = () => {
           Log In
         </h1>
         <p>You can use any email and password to log in to your account</p>
-        <form className="mt-6">
+        <form className="mt-6" onSubmit={handleSubmit}>
           <label className="block mb-2 text-slate-300 text-sm" htmlFor="email">
             Email
           </label>
