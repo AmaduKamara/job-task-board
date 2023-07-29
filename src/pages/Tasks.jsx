@@ -1,18 +1,36 @@
+import { useEffect, useState } from "react";
 import { MdKeyboardArrowUp, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import Task from "../components/Task";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Tasks = () => {
+  const [user, setUser] = useState();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const userData = await JSON.parse(localStorage.getItem("user"));
+      setUser(userData);
+    };
+    getUser();
+  }, [navigate]);
+
+  const addTask = () => {
+    if (user) navigate("/create-listing");
+  };
+
   return (
     <div className="py-32 h-screen">
       <div className="flex justify-between items-center">
         <h1 className="text-slate-200 text-lg md:text-3xl">Tasks</h1>
-        <Link
-          to="/new-task"
+        <button
+          disabled={!user}
           className="border py-2 px-5 border-gray-700 mr-2 rounded-md text-slate-200 text-sm"
+          onClick={addTask}
         >
-          New Task
-        </Link>
+          {user ? "Add Task" : "Login to add task"}
+        </button>
       </div>
 
       <div className="rounded-md border border-slate-500 text-slate-400 mt-6">
