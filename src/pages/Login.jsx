@@ -6,7 +6,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate();
+   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,25 +15,17 @@ const Login = () => {
       setError("Please fill in all fields");
       return;
     }
+     const newUser = {
+       email,
+       password,
+     };
 
-    const userData = localStorage.getItem("user");
+     localStorage.setItem("user", JSON.stringify(newUser));
 
-    if (!userData) {
-      setError("Please fill in all fields");
-      return;
-    }
+     setEmail("");
+     setPassword("");
 
-    console.log(userData);
-
-    const user = JSON.parse(userData);
-    console.log(user);
-
-    // Check if the provided email and password match the stored user data
-    if (user.email === email && user.password === password) {
-      navigate("/");
-    } else {
-      setError("Invalid credentials. Please try again.");
-    }
+     navigate("/");
   };
 
   return (
@@ -81,7 +73,8 @@ const Login = () => {
             <button
               disabled={!email && !password}
               className={`${
-                !email || !password
+                !email ||
+                !password
                   ? "bg-gray-700  border py-2 px-5 border-gray-700 rounded-md text-sm text-slate-600"
                   : "bg-slate-100 text-slate-800 border py-2 px-5 border-gray-700 rounded-md text-sm"
               }`}
