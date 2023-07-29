@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import Jobs from "./pages/Jobs";
 import Tasks from "./pages/Tasks";
@@ -7,8 +7,21 @@ import Signup from "./pages/Signup";
 import NewTask from "./pages/NewTask";
 import CreateListing from "./pages/CreateListing";
 import NotFound from "./pages/NotFound";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [user, setUser] = useState();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const userData = await JSON.parse(localStorage.getItem("user"));
+      setUser(userData);
+    };
+    getUser();
+  }, [navigate]);
+
   return (
     <div className="">
       <Header />
@@ -18,8 +31,8 @@ function App() {
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/new-task" element={<NewTask />} />
-          <Route path="/create-listing" element={<CreateListing />} />
+          {user && <Route path="/new-task" element={<NewTask />} />}
+          {user && <Route path="/create-listing" element={<CreateListing />} />}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
