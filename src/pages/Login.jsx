@@ -1,9 +1,41 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    const userData = localStorage.getItem("user");
+
+    if (!userData) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    console.log(userData);
+
+    const user = JSON.parse(userData);
+    console.log(user);
+
+    // Check if the provided email and password match the stored user data
+    if (user.email === email && user.password === password) {
+      navigate("/");
+    } else {
+      setError("Invalid credentials. Please try again.");
+    }
   };
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="w-1/3 border border-gray-700 rounded-md p-6 text-slate-400">
@@ -19,6 +51,8 @@ const Login = () => {
             type="email"
             id="email"
             className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <label
             className="block mb-2 text-slate-300 text-sm"
@@ -30,7 +64,10 @@ const Login = () => {
             type="password"
             id="password"
             className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
+          {error && <p className="py-2 mb-3 text-sm text-red-300">{error}</p>}
           <div className="flex justify-end items-center">
             <Link to="/" className="px-5 text-slate-200 text-sm">
               Cancel
@@ -42,8 +79,12 @@ const Login = () => {
               Sign Up
             </Link>
             <button
-              disabled
-              className="bg-gray-700 border py-2 px-5 border-gray-700 rounded-md text-sm"
+              disabled={!email && !password}
+              className={`${
+                !email || !password
+                  ? "bg-gray-700  border py-2 px-5 border-gray-700 rounded-md text-sm text-slate-600"
+                  : "bg-slate-100 text-slate-800 border py-2 px-5 border-gray-700 rounded-md text-sm"
+              }`}
             >
               Log In
             </button>
