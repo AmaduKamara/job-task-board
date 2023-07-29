@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -12,7 +13,7 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!email || !password || !confirmPassword) {
+    if (!username || !email || !password || !confirmPassword) {
       setError("Please fill in all fields");
       return;
     }
@@ -23,17 +24,19 @@ const Signup = () => {
     }
 
     const newUser = {
+      username,
       email,
-      password
+      password,
     };
 
     localStorage.setItem("user", JSON.stringify(newUser));
 
+    setUsername("");
     setEmail("");
     setPassword("");
     setConfirmPassword("");
 
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -44,6 +47,19 @@ const Signup = () => {
         </h1>
         <p>You do not need to create account but it's fine if you want to!</p>
         <form className="mt-6" onSubmit={handleSubmit}>
+          <label
+            className="block mb-2 text-slate-300 text-sm"
+            htmlFor="userName"
+          >
+            Username
+          </label>
+          <input
+            type="username"
+            id="username"
+            className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
           <label className="block mb-2 text-slate-300 text-sm" htmlFor="email">
             Email
           </label>
@@ -52,7 +68,7 @@ const Signup = () => {
             id="email"
             className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value.toLocaleLowerCase())}
           />
           <label
             className="block mb-2 text-slate-300 text-sm"
