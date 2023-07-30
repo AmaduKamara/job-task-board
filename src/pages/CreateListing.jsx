@@ -3,12 +3,73 @@ import { IoMdEyeOff } from "react-icons/io";
 import { BiMoney, BiCalendar } from "react-icons/bi";
 import { LuGraduationCap } from "react-icons/lu";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 const CreateListing = () => {
   const [showPreview, setShowPreview] = useState(false);
+  const [title, setTitle] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [location, setLocation] = useState("");
+  const [applicationURL, setApplicationURL] = useState("");
+  const [time, setTime] = useState("Full Time");
+  const [experience, setExperience] = useState("Mid-Level");
+  const [salary, setSalary] = useState(0);
+  const [shortDescription, setShortDescription] = useState("");
+  const [fullDescription, setFullDescription] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (
+      !title ||
+      !companyName ||
+      !location ||
+      !applicationURL ||
+      !time ||
+      !experience ||
+      !salary ||
+      !shortDescription ||
+      !fullDescription
+    )
+      return;
+
+    // Create a user object with the collected information
+    const newListing = {
+      id: uuidv4(),
+      title,
+      companyName,
+      location,
+      applicationURL,
+      time,
+      experience,
+      salary,
+      shortDescription,
+      fullDescription,
+    };
+
+    // Retrieve the existing listings array from localStorage or create an empty array if it doesn't exist
+    const existingListings = localStorage.getItem("listings");
+    const listings = existingListings ? JSON.parse(existingListings) : [];
+
+    // Append the new listing to the array
+    listings.push(newListing);
+
+    localStorage.setItem("listings", JSON.stringify(listings));
+
+    setTitle("");
+    setCompanyName("");
+    setLocation("");
+    setApplicationURL("");
+    setTime("");
+    setExperience("");
+    setSalary("");
+    setShortDescription("");
+    setFullDescription("");
+
+    navigate("/");
   };
 
   const handleShowPreview = () => {
@@ -30,6 +91,9 @@ const CreateListing = () => {
               type="text"
               id="title"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
             />
           </div>
 
@@ -44,6 +108,9 @@ const CreateListing = () => {
               type="text"
               id="companyName"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              required
             />
           </div>
 
@@ -58,6 +125,9 @@ const CreateListing = () => {
               type="text"
               id="location"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              required
             />
           </div>
         </div>
@@ -74,6 +144,9 @@ const CreateListing = () => {
               type="text"
               id="applicationURL"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400"
+              value={applicationURL}
+              onChange={(e) => setApplicationURL(e.target.value)}
+              required
             />
           </div>
 
@@ -85,8 +158,13 @@ const CreateListing = () => {
               type="text"
               id="time"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400 text-lg"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              required
             >
-              <option value="Full Time">Full Time</option>
+              <option selected value="Full Time">
+                Full Time
+              </option>
               <option value="Part Time">Part Time</option>
               <option value="Internship">Internship</option>
             </select>
@@ -103,6 +181,9 @@ const CreateListing = () => {
               type="text"
               id="experience"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400 text-lg"
+              value={experience}
+              onChange={(e) => setExperience(e.target.value)}
+              required
             >
               <option value="Junior">Junior</option>
               <option selected value="Mid-Level">
@@ -125,6 +206,10 @@ const CreateListing = () => {
               type="number"
               id="salary"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-1 text-slate-400"
+              placeholder="$0.00"
+              value={salary}
+              onChange={(e) => setSalary(+e.target.value)}
+              required
             />
             <p className="mb-5 text-slate-400 text-sm">In USD</p>
           </div>
@@ -142,6 +227,9 @@ const CreateListing = () => {
               maxLength={200}
               rows="5"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-1 text-slate-400"
+              value={shortDescription}
+              onChange={(e) => setShortDescription(e.target.value)}
+              required
             ></textarea>
             <p className="mb-5 text-slate-400 text-sm">Max 200 characcters</p>
           </div>
@@ -159,6 +247,9 @@ const CreateListing = () => {
               id="fullDescription"
               rows="5"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-1 text-slate-400"
+              value={fullDescription}
+              onChange={(e) => setFullDescription(e.target.value)}
+              required
             ></textarea>
           </div>
         </div>
@@ -170,10 +261,7 @@ const CreateListing = () => {
           >
             Show Preview
           </button>
-          <button
-            disabled
-            className="bg-gray-700 border py-2 px-5 border-gray-700 rounded-md text-sm"
-          >
+          <button className="bg-slate-200 border py-2 px-5 border-gray-700 rounded-md text-sm">
             Save
           </button>
         </div>
