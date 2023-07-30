@@ -1,10 +1,11 @@
-import { BiDotsHorizontalRounded } from "react-icons/bi";
+import { BiDotsHorizontalRounded, BiSolidEditAlt } from "react-icons/bi";
 import { PiSuitcaseSimpleDuotone } from "react-icons/pi";
+import { AiOutlineDelete } from "react-icons/ai";
 import { HiOutlineArrowSmDown, HiOutlineArrowSmUp } from "react-icons/hi";
 import {
   MdCheckBoxOutlineBlank,
-  MdCheckBox,
-  MdPersonOutline,
+  // MdCheckBox,
+  // MdPersonOutline,
 } from "react-icons/md";
 
 const Task = () => {
@@ -31,8 +32,15 @@ const Task = () => {
           <span>Work</span>
         </p>
       </div>
-      <div>
-        <BiDotsHorizontalRounded size={24} />
+      <div className="flex items-center space-x-4">
+        <BiSolidEditAlt
+          className="hover:text-cyan-400 cursor-pointer"
+          size={24}
+        />
+        <AiOutlineDelete
+          className="hover:text-red-400 cursor-pointer"
+          size={24}
+        />
       </div>
     </div>
   );
