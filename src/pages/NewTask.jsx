@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 const NewTask = () => {
-  const [title, setTitle] = useState('')
-  const [status, setStatus] = useState('')
-  const [category, setCategory] = useState('')
-  const [priority, setPriority] = useState('')
-  
+  const [title, setTitle] = useState("");
+  const [status, setStatus] = useState("");
+  const [category, setCategory] = useState("");
+  const [priority, setPriority] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -26,6 +26,9 @@ const NewTask = () => {
               type="text"
               id="title"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
             />
           </div>
 
@@ -40,6 +43,9 @@ const NewTask = () => {
               type="text"
               id="status"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400 text-lg"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              required
             >
               <option value="Todo">Todo</option>
               <option value="In Progress">In Progress</option>
@@ -60,6 +66,9 @@ const NewTask = () => {
               type="text"
               id="category"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400 text-lg"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
             >
               <option value="Work">Work</option>
               <option value="Personal">Personal</option>
@@ -77,6 +86,9 @@ const NewTask = () => {
               type="text"
               id="priority"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400 text-lg"
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}
+              required
             >
               <option value="High">High</option>
               <option selected value="Medium">
