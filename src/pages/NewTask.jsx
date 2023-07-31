@@ -1,4 +1,11 @@
+import { useState } from "react";
+
 const NewTask = () => {
+  const [title, setTitle] = useState('')
+  const [status, setStatus] = useState('')
+  const [category, setCategory] = useState('')
+  const [priority, setPriority] = useState('')
+  
   const handleSubmit = (e) => {
     e.preventDefault();
   };
