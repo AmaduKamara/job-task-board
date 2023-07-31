@@ -261,7 +261,10 @@ const CreateListing = () => {
           >
             Show Preview
           </button>
-          <button className="bg-slate-200 border py-2 px-5 border-gray-700 rounded-md text-sm">
+          <button
+            type="submit"
+            className="bg-slate-200 border py-2 px-5 border-gray-700 rounded-md text-sm"
+          >
             Save
           </button>
         </div>
