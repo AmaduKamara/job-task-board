@@ -17,7 +17,7 @@ const Tasks = () => {
   }, [navigate]);
 
   const addTask = () => {
-    if (user) navigate("/create-listing");
+    if (user) navigate("/new-task");
   };
 
   return (

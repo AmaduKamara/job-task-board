@@ -1,6 +1,43 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+
 const NewTask = () => {
+  const [title, setTitle] = useState("");
+  const [status, setStatus] = useState("");
+  const [category, setCategory] = useState("");
+  const [priority, setPriority] = useState("");
+
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!title || !status || !category || !priority) return;
+
+    const newTask = {
+      id: uuidv4(),
+      title,
+      status,
+      category,
+      priority,
+    };
+
+    // Retrieve the existing listings array from localStorage or create an empty array if it doesn't exist
+    const existingTasks = localStorage.getItem("tasks");
+    const tasks = existingTasks ? JSON.parse(existingTasks) : [];
+
+    // Append the new listing to the array
+    tasks.push(newTask);
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    setTitle("");
+    setStatus("");
+    setCategory("");
+    setPriority("");
+
+    navigate("/tasks");
   };
 
   return (
@@ -19,6 +56,9 @@ const NewTask = () => {
               type="text"
               id="title"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
             />
           </div>
 
@@ -33,8 +73,14 @@ const NewTask = () => {
               type="text"
               id="status"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400 text-lg"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              required
             >
-              <option value="Todo">Todo</option>
+              <option>Select option</option>
+              <option selected value="Todo">
+                Todo
+              </option>
               <option value="In Progress">In Progress</option>
               <option value="Completed">Completed</option>
             </select>
@@ -53,8 +99,14 @@ const NewTask = () => {
               type="text"
               id="category"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400 text-lg"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
             >
-              <option value="Work">Work</option>
+              <option>Select option</option>
+              <option selected value="Work">
+                Work
+              </option>
               <option value="Personal">Personal</option>
             </select>
           </div>
@@ -70,7 +122,11 @@ const NewTask = () => {
               type="text"
               id="priority"
               className="bg-transparent border border-gray-600 rounded-md py-2 px-4 w-full mb-5 text-slate-400 text-lg"
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}
+              required
             >
+              <option>Select option</option>
               <option value="High">High</option>
               <option selected value="Medium">
                 Medium
@@ -80,7 +136,10 @@ const NewTask = () => {
           </div>
         </div>
         <div className="flex justify-end">
-          <button className="flex justify-end py-2 px-6 bg-slate-200 text-slate-800 text-sm rounded-md">
+          <button
+            type="submit"
+            className="flex justify-end py-2 px-6 bg-slate-200 text-slate-800 text-sm rounded-md"
+          >
             Save
           </button>
         </div>
