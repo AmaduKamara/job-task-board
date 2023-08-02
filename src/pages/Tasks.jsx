@@ -85,7 +85,7 @@ const Tasks = () => {
           </div>
         )}
 
-        {tasks && tasks.map((task) => <Task key={task.id} task />)}
+        {tasks && tasks.map((task) => <Task key={task.id} task={task} />)}
       </div>
     </div>
   );
