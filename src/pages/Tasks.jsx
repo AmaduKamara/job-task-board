@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Tasks = () => {
   const [user, setUser] = useState();
+  const [tasks, setTasks] = useState([]);
 
   const navigate = useNavigate();
 
@@ -15,6 +16,16 @@ const Tasks = () => {
     };
     getUser();
   }, [navigate]);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const tasksData = await JSON.parse(localStorage.getItem("tasks"));
+      setTasks(tasksData);
+      console.log(tasks);
+    };
+
+    fetchTasks();
+  }, []);
 
   const addTask = () => {
     if (user) navigate("/new-task");
