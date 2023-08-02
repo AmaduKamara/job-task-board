@@ -25,7 +25,7 @@ const Tasks = () => {
     };
 
     fetchTasks();
-  }, []);
+  }, [tasks]);
 
   const addTask = () => {
     if (user) navigate("/new-task");
