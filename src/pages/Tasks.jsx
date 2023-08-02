@@ -77,11 +77,13 @@ const Tasks = () => {
           <div></div>
         </div>
 
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
+        {!tasks && (
+          <div className="w-full">
+            <h2 className="text-lg md:text-2xl text-slate-200">
+              Sorry, no tasks found! 👍🏽
+            </h2>
+          </div>
+        )}
       </div>
     </div>
   );
