@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Tasks = () => {
   const [user, setUser] = useState();
+  const [tasks, setTasks] = useState([]);
 
   const navigate = useNavigate();
 
@@ -15,6 +16,16 @@ const Tasks = () => {
     };
     getUser();
   }, [navigate]);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const tasksData = await JSON.parse(localStorage.getItem("tasks"));
+      setTasks(tasksData);
+      console.log(tasks);
+    };
+
+    fetchTasks();
+  }, [tasks]);
 
   const addTask = () => {
     if (user) navigate("/new-task");
@@ -66,11 +77,15 @@ const Tasks = () => {
           <div></div>
         </div>
 
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
+        {!tasks && (
+          <div className="w-full">
+            <h2 className="text-lg md:text-2xl text-slate-200">
+              Sorry, no tasks found! 👍🏽
+            </h2>
+          </div>
+        )}
+
+        {tasks && tasks.map((task) => <Task key={task.id} task={task} />)}
       </div>
     </div>
   );
