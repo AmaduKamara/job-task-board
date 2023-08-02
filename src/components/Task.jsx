@@ -8,28 +8,29 @@ import {
   // MdPersonOutline,
 } from "react-icons/md";
 
-const Task = () => {
+const Task = ({ task }) => {
   return (
     <div className="py-3 px-4 flex justify-between border-b border-slate-400 rounded-b">
       <div>
-        <p className="text-slate-300 flex items-center text-sm">Do Laundry</p>
+        <p className="text-slate-300 flex items-center text-sm">{task.title}</p>
       </div>
       <div>
         <p className="text-slate-300 flex items-center text-sm">
           <MdCheckBoxOutlineBlank size={14} className="mr-1" />{" "}
-          <span>Todo</span>
+          <span>{task.status}</span>
         </p>
       </div>
       <div>
         <p className="text-slate-300 flex items-center text-sm">
           {" "}
-          <HiOutlineArrowSmDown size={16} className="mr-1" /> <span>Low</span>
+          <HiOutlineArrowSmDown size={16} className="mr-1" />{" "}
+          <span>{task.category}</span>
         </p>
       </div>
       <div>
         <p className="text-slate-300 flex items-center text-sm">
           <PiSuitcaseSimpleDuotone size={16} className="mr-1" />
-          <span>Work</span>
+          <span>{task.priority}</span>
         </p>
       </div>
       <div className="flex items-center space-x-4">
