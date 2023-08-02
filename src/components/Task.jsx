@@ -1,12 +1,8 @@
-import { BiDotsHorizontalRounded, BiSolidEditAlt } from "react-icons/bi";
+import { BiSolidEditAlt } from "react-icons/bi";
 import { PiSuitcaseSimpleDuotone } from "react-icons/pi";
 import { AiOutlineDelete } from "react-icons/ai";
-import { HiOutlineArrowSmDown, HiOutlineArrowSmUp } from "react-icons/hi";
-import {
-  MdCheckBoxOutlineBlank,
-  // MdCheckBox,
-  // MdPersonOutline,
-} from "react-icons/md";
+import { HiOutlineArrowSmDown } from "react-icons/hi";
+import { MdCheckBoxOutlineBlank } from "react-icons/md";
 
 const Task = ({ task }) => {
   return (
